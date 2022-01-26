@@ -62,4 +62,4 @@ The scripts create a logfile with the name of the manufacturer in the folder C:\
 # Feature requests
 If you have an idea for a new feature in this repo, send me an issue with the subject Feature request and write your suggestion in the text. I will then check the feature and implement it if necessary.
 
-Created by @niklasrast 
+Created by @niklasrast and @TyroneHelmus
