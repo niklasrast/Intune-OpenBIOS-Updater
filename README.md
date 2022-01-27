@@ -54,6 +54,42 @@ $BIOSPWD = "MyPassword1"
 To download the right BIOS Update version from dell please download the bios update from the product site in the manual download section. For example: https://www.dell.com/support/home/de-de/product-support/product/latitude-14-7490-laptop/drivers
 <img src="img\dell-download.png"/>
 
+## Update for Lenovo
+```powershell
+"LENOVO" { 
+    switch ($Model) {
+        "20N3SADW00" { #20N3SADW00 = T490 #Replace Model here
+            $EXE = "$PSSCRIPTROOT\LENOVO\$Model\WINUPTP.exe"
+            $PARAM = '-s'
+            $InstalledBIOSVersion = (Get-WmiObject win32_bios).SMBIOSBIOSVersion
+            $InstalledBIOSVersion = $InstalledBIOSVersion.Split("(")
+            $InstalledBIOSVersion = $InstalledBIOSVersion[1].replace(' )','')
+            $UpdateBIOSVersion = "1.75" #Change Update Version number here
+
+            if ($InstalledBIOSVersion -lt $UpdateBIOSVersion) {
+                Write-Host "Installed BIOS Version is older than Update Version"
+                Write-Host "Version to install: " + $UpdateBIOSVersion
+                Start-Process -FilePath $EXE -ArgumentList $PARAM -Wait
+                Copy-Item -Path $PSSCRIPTROOT\WINUPTP.log -Destination "C:\Windows\Logs" -Force
+                Restart-Computer -Force
+            } else {
+                Write-Host "BIOS Update not needed."
+            } 
+            }
+        Default {
+            Write-Host "Model not supported by this wrapper!"
+        }
+    }
+}
+```
+Download the bios update file from the client site at lenovo. For example the T490 site:
+<br><img src="img\lenovo-download-1.png"/><br>
+Now extract the bios files:
+<br><img src="img\lenovo-download-2.png"/><br>
+<br><img src="img\lenovo-download-3.png"/><br>
+<br><img src="img\lenovo-download-4.png"/><br>
+Now create the folder LENOVO\MODELNAMEHERE and paste the content from the extracted folder (For example: C:\DRIVERS\FLASH\n2iuj30w\20222701.09445940) here.
+
 ## Update for HP
 ```powershell
 "HP" {

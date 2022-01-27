@@ -84,6 +84,32 @@ if ($install)
                     }
                 }
 
+                "LENOVO" { 
+                    switch ($Model) {
+                        "20N3SADW00" { #20N3SADW00 = T490
+                            $EXE = "$PSSCRIPTROOT\LENOVO\$Model\WINUPTP.exe"
+                            $PARAM = '-s'
+                            $InstalledBIOSVersion = (Get-WmiObject win32_bios).SMBIOSBIOSVersion
+                            $InstalledBIOSVersion = $InstalledBIOSVersion.Split("(")
+                            $InstalledBIOSVersion = $InstalledBIOSVersion[1].replace(' )','')
+                            $UpdateBIOSVersion = "1.75"
+
+                            if ($InstalledBIOSVersion -lt $UpdateBIOSVersion) {
+                                Write-Host "Installed BIOS Version is older than Update Version"
+                                Write-Host "Version to install: " + $UpdateBIOSVersion
+                                Start-Process -FilePath $EXE -ArgumentList $PARAM -Wait
+                                Copy-Item -Path $PSSCRIPTROOT\WINUPTP.log -Destination "C:\Windows\Logs" -Force
+                                Restart-Computer -Force
+                            } else {
+                                Write-Host "BIOS Update not needed."
+                            } 
+                         }
+                        Default {
+                            Write-Host "Model not supported by this wrapper!"
+                        }
+                    }
+                }
+
                 "HP" {
                     $Model = $Model.replace(' Notebook PC','')
                     switch ($Model)
@@ -92,7 +118,7 @@ if ($install)
                         {
                             $EXE = "$PSSCRIPTROOT\HP\HpFirmwareUpdRec.exe"
                             $PARAM = '-b -s'
-                            $InstalledBIOSVersion = (gwmi win32_bios).SMBIOSBIOSVersion
+                            $InstalledBIOSVersion = (Get-WmiObject win32_bios).SMBIOSBIOSVersion
                             $InstalledBIOSVersion = $InstalledBIOSVersion.substring($InstalledBIOSVersion.length-8)
                             $UpdateBIOSVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo("$PSSCRIPTROOT\HP\$Model\sp136413.exe").ProductVersion
 
@@ -110,7 +136,7 @@ if ($install)
                         {
                             $EXE = "$PSSCRIPTROOT\HP\HpFirmwareUpdRec.exe"
                             $PARAM = '-b -s'
-                            $InstalledBIOSVersion = (gwmi win32_bios).SMBIOSBIOSVersion
+                            $InstalledBIOSVersion = (Get-WmiObject win32_bios).SMBIOSBIOSVersion
                             $InstalledBIOSVersion = $InstalledBIOSVersion.substring($InstalledBIOSVersion.length-8)
                             $UpdateBIOSVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo("$PSSCRIPTROOT\HP\$Model\sp136471.exe").ProductVersion
 
