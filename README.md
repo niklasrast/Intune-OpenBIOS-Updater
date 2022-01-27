@@ -30,50 +30,53 @@ $BIOSPWD = "MyPassword1"
 ```powershell
 "Dell Inc." { 
   switch ($Model) {
-      "Latitude 7420" { #Change Model here
-      $EXE = "$PSSCRIPTROOT\DELL\LATITUDE7420\Latitude_7X20_1.14.1.exe" #Change EXE-Filename here
-      $PARAM = '/s /f /r /p=' + $BIOSPWD + ' /l="C:\Windows\Logs\BIOSUPDATE-7420.log"' #Change Model here
-      $InstalledBIOSVersion = (Get-WmiObject win32_bios).SMBIOSBIOSVersion
-      $UpdateBIOSVersion = "1.14.1" #Change Version of the Update here
+     "Latitude 7420" { #Change Model here
+         $EXE = "$PSSCRIPTROOT\DELL\LATITUDE7420\Latitude_7X20_1.14.1.exe" #Change EXE Filename here
+         $PARAM = '/s /f /r /p=' + $BIOSPWD + ' /l="C:\Windows\Logs\BIOSUPDATE-7420.log"' #Change Model here
+         $InstalledBIOSVersion = (Get-WmiObject win32_bios).SMBIOSBIOSVersion
+         $UpdateBIOSVersion = "1.14.1" #Change Update Version here
 
-      if ($InstalledBIOSVersion -lt $UpdateBIOSVersion) {
-          Write-Host "Installed BIOS Version is older than Update Version"
-          Write-Host "Version to install: " + $UpdateBIOSVersion
-          Start-Process -FilePath $EXE -ArgumentList $PARAM -Wait
-      } else {
-          Write-Host "BIOS Update not needed."
-   } 
+         if ($InstalledBIOSVersion -lt $UpdateBIOSVersion) {
+             Write-Host "Installed BIOS Version is older than Update Version"
+             Write-Host "Version to install: " + $UpdateBIOSVersion
+             Start-Process -FilePath $EXE -ArgumentList $PARAM -Wait
+         } else {
+             Write-Host "BIOS Update not needed."
+         } 
+      }
+      Default
+      {
+          Write-Host "Model not supported by this wrapper!"
+      }
 }
+                    
 ```
 
 ## Update for HP
 ```powershell
 "HP" {
- $Model = $Model.replace(' Notebook PC','')
+  $Model = $Model.replace(' Notebook PC','')
   switch ($Model)
   {
       "HP ProBook 450 G8" #Change Model here
       {
           $EXE = "$PSSCRIPTROOT\HP\HpFirmwareUpdRec.exe"
           $PARAM = '-b -s'
-
           $InstalledBIOSVersion = (gwmi win32_bios).SMBIOSBIOSVersion
           $InstalledBIOSVersion = $InstalledBIOSVersion.substring($InstalledBIOSVersion.length-8)
-
-          $UpdateBIOSVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo("$PSSCRIPTROOT\HP\HP ProBook 450 G8\sp136413.exe").ProductVersion #Change Model and EXE-Filename here
+          $UpdateBIOSVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo("$PSSCRIPTROOT\HP\$Model\sp136413.exe").ProductVersion #Change EXE Filename here
 
           if ($InstalledBIOSVersion -lt $UpdateBIOSVersion) {
               Write-Host "Installed BIOS Version is older than Update Version"
               Write-Host "Version to install: $UpdateBIOSVersion"
               Start-Process -FilePath $EXE -ArgumentList $PARAM -Wait
-          }
-
+          }               
           else
           {
               Write-Host "BIOS Update not needed."
           }     
-
       }
+
       Default
       {
           Write-Host "Model not supported by this wrapper!"
