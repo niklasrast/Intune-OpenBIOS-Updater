@@ -87,7 +87,6 @@ $BIOSPWD = "MyPassword1"
 
 # Planed changes
 - Add support for Lenovo bios configurations
-- Add support for HP bios configurations
 
 
 ## Logfiles:
