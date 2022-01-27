@@ -21,9 +21,9 @@ This repo contains an powershell script to update bios versions on lenovo, dell 
 <hr>
 
 ## Customisation:
+Change the password for your BIOS setup:
 ```powershell
 $BIOSPWD = "MyPassword1"
-
 ```
 
 ## Updater for DELL:
@@ -51,6 +51,8 @@ $BIOSPWD = "MyPassword1"
 }
                     
 ```
+To download the right BIOS Update version from dell please download the bios update from the product site in the manual download section. For example: https://www.dell.com/support/home/de-de/product-support/product/latitude-14-7490-laptop/drivers
+<img src="img\dell-download.png"/>
 
 ## Update for HP
 ```powershell
@@ -84,6 +86,12 @@ $BIOSPWD = "MyPassword1"
   }                 
 }
 ```
+To get the BIOs-Files for the Update for the Installer you need to download the BIOS-System Firmware of your Device off the DELL Support Side:
+<br><img src="img\hp-download-1.png"/><br>
+You need to download and install manually:
+<br><img src="img\hp-download-2.png"/><br>
+Download the Installer into the created folder (example: HP ProBook 450 G8) of the System you want to add. Then you need to extract the .exe and close the second Installer after installing the first .exe. The only data needed is everything with .bin, .inf and sp_.exe in the folder:
+<br><img src="img\hp-download-3.png"/><br>
 
 # Planed changes
 - Add support for Lenovo bios configurations
