@@ -31,11 +31,11 @@ $BIOSPWD = "MyPassword1"
 ```powershell
 "Dell Inc." { 
   switch ($Model) {
-      "Latitude 7420" { 
-      $EXE = "$PSSCRIPTROOT\DELL\LATITUDE7420\Latitude_7X20_1.14.1.exe"
-      $PARAM = '/s /f /r /p=' + $BIOSPWD + ' /l="C:\Windows\Logs\BIOSUPDATE-7420.log"'
+      "Latitude 7420" { #Change Model here
+      $EXE = "$PSSCRIPTROOT\DELL\LATITUDE7420\Latitude_7X20_1.14.1.exe" #Change EXE-Filename here
+      $PARAM = '/s /f /r /p=' + $BIOSPWD + ' /l="C:\Windows\Logs\BIOSUPDATE-7420.log"' #Change Model here
       $InstalledBIOSVersion = (Get-WmiObject win32_bios).SMBIOSBIOSVersion
-      $UpdateBIOSVersion = "1.14.1"
+      $UpdateBIOSVersion = "1.14.1" #Change Version of the Update here
 
       if ($InstalledBIOSVersion -lt $UpdateBIOSVersion) {
           Write-Host "Installed BIOS Version is older than Update Version"
