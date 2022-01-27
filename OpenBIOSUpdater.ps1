@@ -82,7 +82,54 @@ if ($install)
                             Write-Host "Model not supported by this wrapper!"
                         }
                     }
-                 }
+                }
+
+                "HP" {
+                    $Model = $Model.replace(' Notebook PC','')
+                    switch ($Model)
+                    {
+                        "HP ProBook 450 G8"
+                        {
+                            $EXE = "$PSSCRIPTROOT\HP\HpFirmwareUpdRec.exe"
+                            $PARAM = '-b -s'
+                            $InstalledBIOSVersion = (gwmi win32_bios).SMBIOSBIOSVersion
+                            $InstalledBIOSVersion = $InstalledBIOSVersion.substring($InstalledBIOSVersion.length-8)
+                            $UpdateBIOSVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo("$PSSCRIPTROOT\HP\$Model\sp136413.exe").ProductVersion
+
+                            if ($InstalledBIOSVersion -lt $UpdateBIOSVersion) {
+                                Write-Host "Installed BIOS Version is older than Update Version"
+                                Write-Host "Version to install: $UpdateBIOSVersion"
+                                Start-Process -FilePath $EXE -ArgumentList $PARAM -Wait
+                            }               
+                            else
+                            {
+                                Write-Host "BIOS Update not needed."
+                            }     
+                        }
+                        "HP EliteBook 840 G5"
+                        {
+                            $EXE = "$PSSCRIPTROOT\HP\HpFirmwareUpdRec.exe"
+                            $PARAM = '-b -s'
+                            $InstalledBIOSVersion = (gwmi win32_bios).SMBIOSBIOSVersion
+                            $InstalledBIOSVersion = $InstalledBIOSVersion.substring($InstalledBIOSVersion.length-8)
+                            $UpdateBIOSVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo("$PSSCRIPTROOT\HP\$Model\sp136471.exe").ProductVersion
+
+                            if ($InstalledBIOSVersion -lt $UpdateBIOSVersion) {
+                                Write-Host "Installed BIOS Version is older than Update Version"
+                                Write-Host "Version to install: $UpdateBIOSVersion"
+                                Start-Process -FilePath $EXE -ArgumentList $PARAM -Wait
+                            }
+                            else
+                            {
+                                Write-Host "BIOS Update not needed."
+                            }  
+                        }
+                        Default
+                        {
+                            Write-Host "Model not supported by this wrapper!"
+                        }
+                    }                 
+                }            
                 Default {
                     Write-Host "Manufacturer not supported by this wrapper!"
                 }
