@@ -46,6 +46,42 @@ $BIOSPWD = "MyPassword1"
 }
 ```
 
+## Update for HP
+```powershell
+"HP" {
+ $Model = $Model.replace(' Notebook PC','')
+  switch ($Model)
+  {
+      "HP ProBook 450 G8" #Change Model here
+      {
+          $EXE = "$PSSCRIPTROOT\HP\HpFirmwareUpdRec.exe"
+          $PARAM = '-b -s'
+
+          $InstalledBIOSVersion = (gwmi win32_bios).SMBIOSBIOSVersion
+          $InstalledBIOSVersion = $InstalledBIOSVersion.substring($InstalledBIOSVersion.length-8)
+
+          $UpdateBIOSVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo("$PSSCRIPTROOT\HP\HP ProBook 450 G8\sp136413.exe").ProductVersion #Change Model and EXE-Filename here
+
+          if ($InstalledBIOSVersion -lt $UpdateBIOSVersion) {
+              Write-Host "Installed BIOS Version is older than Update Version"
+              Write-Host "Version to install: $UpdateBIOSVersion"
+              Start-Process -FilePath $EXE -ArgumentList $PARAM -Wait
+          }
+
+          else
+          {
+              Write-Host "BIOS Update not needed."
+          }     
+
+      }
+      Default
+      {
+          Write-Host "Model not supported by this wrapper!"
+      }
+  }                 
+}
+```
+
 # Planed changes
 - Add support for Lenovo bios configurations
 - Add support for HP bios configurations
