@@ -1,0 +1,55 @@
+[Version]
+Signature   = "$WINDOWS NT$"
+Provider    = %Provider%
+Class       = Firmware
+ClassGuid   = {f2e7dd72-6468-4e36-b6f1-6488f42c1b52}
+DriverVer   = 11/24/2021,01.18.01.0
+CatalogFile = Q78_011801.cat
+PnpLockdown = 1
+
+[Manufacturer]
+%MfgName% = Firmware,NTx86,NTamd64,NTarm
+
+[Firmware.NTx86]
+%DeviceDesc% = Firmware_Install,UEFI\RES_{854BEF26-B844-4F03-8E09-B64B4B1EE21E}
+
+[Firmware.NTamd64]
+%DeviceDesc% = Firmware_Install,UEFI\RES_{854BEF26-B844-4F03-8E09-B64B4B1EE21E}
+
+[Firmware.NTarm]
+%DeviceDesc% = Firmware_Install,UEFI\RES_{854BEF26-B844-4F03-8E09-B64B4B1EE21E}
+
+[Firmware_Install.NT]
+CopyFiles = Firmware_CopyFiles
+
+[Firmware_CopyFiles]
+Q78_011801.bin
+
+[Firmware_Install.NT.Hw]
+AddReg = Firmware_AddReg
+
+[Firmware_AddReg]
+HKR,,FirmwareId,,{854BEF26-B844-4F03-8E09-B64B4B1EE21E}
+HKR,,FirmwareVersion,%REG_DWORD%,0x00011801
+HKR,,FirmwareFilename,,{854BEF26-B844-4F03-8E09-B64B4B1EE21E}\Q78_011801.bin
+
+[SourceDisksNames]
+1 = %DiskName%
+
+[SourceDisksFiles]
+Q78_011801.bin = 1
+
+[DestinationDirs]
+DefaultDestDir = %DIRID_WINDOWS%,Firmware\{854BEF26-B844-4F03-8E09-B64B4B1EE21E}
+
+[Strings]
+;localizable
+Provider     = "HP Inc."
+MfgName      = "HP Inc."
+DeviceDesc   = "HP Q78 System Firmware"
+DiskName     = "Firmware Update"
+
+;non-localizable
+DIRID_WINDOWS = 10
+REG_DWORD     = 0x00010001
+
