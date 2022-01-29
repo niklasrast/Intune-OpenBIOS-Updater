@@ -52,7 +52,6 @@ $BIOSPWD = "MyPassword1"
                     
 ```
 To download the right BIOS Update version from dell please download the bios update from the product site in the manual download section. For example: https://www.dell.com/support/home/de-de/product-support/product/latitude-14-7490-laptop/drivers
-<img src="img\dell-download.png"/>
 ![Alt text](https://github.com/niklasrast/MEM-OpenBIOS-Updater/blob/main/img/dell-download.png "SetupInstructions")
 
 ## Update for Lenovo
@@ -85,7 +84,7 @@ To download the right BIOS Update version from dell please download the bios upd
 ```
 Download the bios update file from the client site at lenovo. For example the T490 site:
 ![Alt text](https://github.com/niklasrast/MEM-OpenBIOS-Updater/blob/main/img/lenovo-download-1.png "SetupInstructions")
-Now extract the bios files:
+Now extract the bios files:<br>
 ![Alt text](https://github.com/niklasrast/MEM-OpenBIOS-Updater/blob/main/img/lenovo-download-2.png "SetupInstructions")
 ![Alt text](https://github.com/niklasrast/MEM-OpenBIOS-Updater/blob/main/img/lenovo-download-3.png "SetupInstructions")
 ![Alt text](https://github.com/niklasrast/MEM-OpenBIOS-Updater/blob/main/img/lenovo-download-4.png "SetupInstructions")
