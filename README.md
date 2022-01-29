@@ -87,7 +87,7 @@ Download the bios update file from the client site at lenovo. For example the T4
 Now extract the bios files:<br>
 ![Alt text](https://github.com/niklasrast/MEM-OpenBIOS-Updater/blob/main/img/lenovo-download-2.png "SetupInstructions")
 ![Alt text](https://github.com/niklasrast/MEM-OpenBIOS-Updater/blob/main/img/lenovo-download-3.png "SetupInstructions")
-![Alt text](https://github.com/niklasrast/MEM-OpenBIOS-Updater/blob/main/img/lenovo-download-4.png "SetupInstructions")
+![Alt text](https://github.com/niklasrast/MEM-OpenBIOS-Updater/blob/main/img/lenovo-download-4.png "SetupInstructions")<br>
 Now create the folder LENOVO\MODELNAMEHERE and paste the content from the extracted folder (For example: C:\DRIVERS\FLASH\n2iuj30w\20222701.09445940) here.
 
 ## Update for HP
@@ -127,7 +127,7 @@ To get the BIOs-Files for the Update for the Installer you need to download the 
 You need to download and install manually:
 ![Alt text](https://github.com/niklasrast/MEM-OpenBIOS-Updater/blob/main/img/hp-download-2.png "SetupInstructions")
 Download the Installer into the created folder (example: HP ProBook 450 G8) of the System you want to add. Then you need to extract the .exe and close the second Installer after installing the first .exe. The only data needed is everything with .bin, .inf and sp_.exe in the folder:
-![Alt text](https://github.com/niklasrast/MEM-OpenBIOS-Updater/blob/main/img/hp-download-3.png "SetupInstructions")
+![Alt text](https://github.com/niklasrast/MEM-OpenBIOS-Updater/blob/main/img/hp-download-3.png "SetupInstructions")<br>
 
 # Planed changes
 - Add support for Lenovo bios configurations
