@@ -11,9 +11,9 @@ This repo contains an powershell script to update bios versions on lenovo, dell 
 ## Software deployment configuration calls:
 
 ### Install:
-´´´powershell
+```powershell
 C:\Windows\SysNative\WindowsPowershell\v1.0\PowerShell.exe -ExecutionPolicy Bypass -Command .\OpenBIOSUpdater.ps1 -install
-´´´
+```
 
 ### Detect:
 - RegKey: HKLM:\SOFTWARE\OS\OpenBIOSUpdater
