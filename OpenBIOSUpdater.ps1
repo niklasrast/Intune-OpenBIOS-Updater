@@ -27,8 +27,8 @@ $logFile = ('{0}\{1}.log' -f "C:\Windows\Logs", [System.IO.Path]::GetFileNameWit
 $BIOSPWD = "MyPassword1"
 
 #Test if registry folder exists
-if ($true -ne (test-Path -Path "HKLM:\SOFTWARE\OS")) {
-    New-Item -Path "HKLM:\SOFTWARE\" -Name "OS" -Force
+if ($true -ne (test-Path -Path "HKLM:\SOFTWARE\COMPANY")) {
+    New-Item -Path "HKLM:\SOFTWARE\" -Name "COMPANY" -Force
 }
 
 if ($install)
@@ -37,8 +37,8 @@ if ($install)
         try
         {         
             #Register package in registry
-            New-Item -Path "HKLM:\SOFTWARE\OS\" -Name "OpenBIOSUpdater"
-            New-ItemProperty -Path "HKLM:\SOFTWARE\OS\OpenBIOSUpdater" -Name "Version" -PropertyType "String" -Value "1.0.0" -Force
+            New-Item -Path "HKLM:\SOFTWARE\COMPANY\" -Name "OpenBIOSUpdater"
+            New-ItemProperty -Path "HKLM:\SOFTWARE\COMPANY\OpenBIOSUpdater" -Name "Version" -PropertyType "String" -Value "1.0.0" -Force
 
             #Log BIOS 
             Write-Host "Current Version: " + (Get-WmiObject win32_bios).SMBIOSBIOSVersion
