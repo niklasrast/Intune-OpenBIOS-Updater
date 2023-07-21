@@ -16,7 +16,7 @@ C:\Windows\SysNative\WindowsPowershell\v1.0\PowerShell.exe -ExecutionPolicy Bypa
 ```
 
 ### Detect:
-- RegKey: HKLM:\SOFTWARE\OS\OpenBIOSUpdater
+- RegKey: HKLM:\SOFTWARE\COMPANY\OpenBIOSUpdater
 - RegKey: Version
 - RegKey: 1.0.0
  
